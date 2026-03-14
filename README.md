@@ -14,6 +14,7 @@ final_project/
 │   └── snowflake_ingest.py       # Gold → Snowflake (pandas write_pandas)
 ├── dags/
 │   └── airbnb_pipeline_dag.py    # Airflow DAG (chains the three jobs)
+├── snowflake_setup.sql           # Snowflake DDL setup and data quality checks
 ├── bronze2silver_pipeline.ipynb  # Original development notebook (kept for reference)
 ├── reddit_collector.py           # Reddit keyword trend collector (standalone script)
 └── setup_vm.sh                   # One-time GCP VM setup script
@@ -116,6 +117,16 @@ Loads the three gold parquet tables into Snowflake using `write_pandas`:
 
 ---
 
+## Snowflake Setup
+
+[snowflake_setup.sql](snowflake_setup.sql) contains the DDL and data quality queries used to set up the Snowflake environment:
+
+- Database, schema, and warehouse creation
+- Combined cross-city tables (`FACT_NEIGHBORHOOD_ALL`, `FACT_LISTING_ALL`)
+- Data quality checks (null rates, duplicate checks, row counts per city)
+
+---
+
 ## Requirements
 
 | Package | Version |
@@ -163,6 +174,12 @@ airflow dags list | grep airbnb
 # Trigger the pipeline
 airflow dags trigger airbnb_pipeline
 ```
+
+---
+
+## Data Access
+
+The raw and processed data resides on the GCP VM shared disk (`/shared/data/`). If you need access to the data, please email us at **xiangyi.kong.2026@anderson.ucla.edu** with your Google account and we will grant you read access to the GCP project.
 
 ---
 
