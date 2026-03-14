@@ -149,8 +149,9 @@ Loads the three gold parquet tables into Snowflake using `write_pandas`:
 |------|-------------|
 | `vw_market_health` | Neighborhood-level occupancy, availability, reviews, and income with Low/Mid/High income tier segmentation |
 | `vw_price_supply_trends` | Supply and revenue trends by neighborhood, room type, and month — includes month-over-month listing growth rate |
-| `vw_host_concentration` | Host market concentration per neighborhood — flags high/medium/low concentration risk based on largest host's market share |
+| `vw_roomtype_by_income` | Room type breakdown by neighborhood with occupancy, revenue, and income group |
 | `vw_income_tier_comparison` | Aggregates listings, reviews, and occupancy by income tier (Low/Mid/High) per city per month |
+| `vw_host_concentration` | Host market concentration per neighborhood — flags high/medium/low concentration risk based on largest host's market share |
 | `vw_saturation_risk` | Identifies oversupplied neighborhoods using latest snapshot — flags High/Medium/Low saturation risk based on listing count vs. demand signals |
 
 ---
