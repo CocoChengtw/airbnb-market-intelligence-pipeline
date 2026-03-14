@@ -1,5 +1,28 @@
 # Airbnb Data Pipeline
 
+## Project Overview
+
+Short-term rental platforms such as Airbnb have significantly reshaped urban tourism and local housing markets. Understanding how Airbnb activity varies across neighborhoods can provide insights for real estate investors, property managers, urban planners, and policymakers.
+
+This project builds a scalable data engineering pipeline that transforms raw Airbnb listing data into structured neighborhood-level market indicators across multiple U.S. cities.
+
+The pipeline integrates:
+- Airbnb listings data
+- Review activity data
+- Socioeconomic information from the U.S. Census (ACS median household income)
+
+The final system produces curated analytical tables and an interactive dashboard that allow users to explore:
+- Airbnb supply patterns
+- Demand signals
+- Host market structure
+- Neighborhood socioeconomic context
+
+The project demonstrates how large-scale marketplace data can be transformed into decision-ready insights using modern data engineering tools.
+
+---
+
+## Pipeline
+
 A three-layer **Bronze → Silver → Gold** ETL pipeline for Airbnb listing data. Uses Apache Spark and Apache Sedona for geospatial processing, orchestrated by Apache Airflow on a GCP VM, with final output loaded into Snowflake.
 
 ---
