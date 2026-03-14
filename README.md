@@ -38,6 +38,7 @@ final_project/
 ├── dags/
 │   └── airbnb_pipeline_dag.py    # Airflow DAG (chains the three jobs)
 ├── snowflake_setup.sql           # Snowflake DDL setup and data quality checks
+├── mart_tables.sql               # Mart views built on top of gold tables for visualization
 ├── bronze2silver_pipeline.ipynb  # Original development notebook (kept for reference)
 ├── reddit_collector.py           # Reddit keyword trend collector (standalone script)
 └── setup_vm.sh                   # One-time GCP VM setup script
@@ -137,6 +138,20 @@ Loads the three gold parquet tables into Snowflake using `write_pandas`:
 | `FACT_NEIGHBORHOOD_MONTH` | `/shared/data/golden/fact_neighborhood_month` |
 | `FACT_HOST_SUMMARY` | `/shared/data/golden/fact_host_summary` |
 | `FACT_LISTING_SUMMARY` | `/shared/data/golden/fact_listing_summary` |
+
+---
+
+## Mart Tables
+
+[mart_tables.sql](mart_tables.sql) builds aggregated views on top of the gold tables for use in downstream visualization and business analysis. All views operate at the neighborhood or neighborhood/quarter grain.
+
+| View | Description |
+|------|-------------|
+| `vw_market_health` | Neighborhood-level occupancy, availability, reviews, and income with Low/Mid/High income tier segmentation |
+| `vw_price_supply_trends` | Supply and revenue trends by neighborhood, room type, and month — includes month-over-month listing growth rate |
+| `vw_host_concentration` | Host market concentration per neighborhood — flags high/medium/low concentration risk based on largest host's market share |
+| `vw_income_tier_comparison` | Aggregates listings, reviews, and occupancy by income tier (Low/Mid/High) per city per month |
+| `vw_saturation_risk` | Identifies oversupplied neighborhoods using latest snapshot — flags High/Medium/Low saturation risk based on listing count vs. demand signals |
 
 ---
 
