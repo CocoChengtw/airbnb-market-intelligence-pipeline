@@ -131,16 +131,11 @@ Loads the three gold parquet tables into Snowflake using `write_pandas`:
 
 ## GCP VM Deployment
 
-### 1. Upload the project to the VM
+### 1. Run the setup script (one-time only)
 
 ```bash
-gcloud compute scp --recurse ./final_project USER@VM_NAME:~/
-```
-
-### 2. Run the setup script (one-time only)
-
-```bash
-bash ~/final_project/setup_vm.sh
+cd /shared
+bash final_project/setup_vm.sh
 ```
 
 The script handles: Java 17 installation, Python package installation, Airflow initialization, admin account creation, setting `dags_folder` to `/shared/final_project/dags`, and starting the scheduler and webserver.
