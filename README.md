@@ -216,6 +216,14 @@ airflow dags trigger airbnb_pipeline
 
 ---
 
+## Dashboard
+
+The final interactive dashboard is built in Tableau and published publicly:
+
+[View Dashboard on Tableau Public](https://public.tableau.com/views/Version1_17736010325130/FINALDASHBOARD?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+---
+
 ## Data Access
 
 The raw and processed data resides on the GCP VM shared disk (`/shared/data/`). If you need access to the data, please email us at **xiangyi.kong.2026@anderson.ucla.edu** with your Google account and we will grant you read access to the GCP project.
