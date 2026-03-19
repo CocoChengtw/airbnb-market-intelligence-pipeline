@@ -156,7 +156,13 @@ Loads the three gold parquet tables into Snowflake using `write_pandas`:
 
 ---
 
-## Snowflake Setup
+## Snowflake
+
+Access the Snowflake workspace: [app.snowflake.com](https://app.snowflake.com/us-east-1/dxc27173/#/workspaces/ws/USER%24/PUBLIC/DEFAULT%24/Untitled.sql)
+
+After the pipeline runs, the three gold tables are available under `AIRBNB_PIPELINE.GOLD`.
+
+### Snowflake Setup
 
 [snowflake_setup.sql](snowflake_setup.sql) contains the DDL and data quality queries used to set up the Snowflake environment:
 
@@ -190,7 +196,9 @@ bash final_project/setup_vm.sh
 
 The script handles: Java 17 installation, Python package installation, Airflow initialization, admin account creation, setting `dags_folder` to `/shared/final_project/dags`, and starting the scheduler and webserver.
 
-### 3. Open firewall for the Airflow UI
+### 2. Open firewall for the Airflow UI (one-time only)
+
+If port 8080 is not yet open, run:
 
 ```bash
 gcloud compute firewall-rules create allow-airflow \
@@ -198,9 +206,20 @@ gcloud compute firewall-rules create allow-airflow \
   --target-tags airflow-vm
 ```
 
+If the rule already exists, skip this step.
+
+### 3. Start Airflow
+
+```bash
+airflow scheduler &
+airflow webserver --port 8080 &
+```
+
 ### 4. Verify Airflow is running
 
-Open `http://<VM_EXTERNAL_IP>:8080` in your browser. Login with username `admin` and password `project405_team9!` (**change this immediately**).
+Open `http://34.94.143.232:8080` in your browser. Login with username `admin` and password `project405_team9!`.
+
+> If accessing via VSCode SSH, port 8080 is auto-forwarded — use `http://localhost:8080` instead.
 
 ---
 
