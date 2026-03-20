@@ -6,6 +6,14 @@
 # ============================================================
 set -euo pipefail
 
+# Load credentials from config.env
+CONFIG_FILE="/shared/final_project/config.env"
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "ERROR: $CONFIG_FILE not found. Copy config.env.example to config.env and fill in values."
+    exit 1
+fi
+source "$CONFIG_FILE"
+
 AIRFLOW_HOME="${HOME}/airflow"
 
 echo "=== [1/5] Install Java 17 ==="
@@ -36,19 +44,33 @@ airflow users create \
     --lastname User \
     --role Admin \
     --email admin@example.com \
-    --password project405_team9!
+    --password "${AIRFLOW_ADMIN_PASSWORD}"
 
 echo "=== [4/5] Configure dags_folder ==="
 # Point Airflow directly at the shared DAGs directory
 sed -i 's|^dags_folder = .*|dags_folder = /shared/final_project/dags|' "${AIRFLOW_HOME}/airflow.cfg"
 
-echo "=== [5/5] Start Airflow (background) ==="
+echo "=== [5/5] Set Snowflake environment variables ==="
+cat >> ~/.bashrc << EOF
+
+# Snowflake connection (loaded from config.env)
+export SNOWFLAKE_ACCOUNT="${SNOWFLAKE_ACCOUNT}"
+export SNOWFLAKE_USER="${SNOWFLAKE_USER}"
+export SNOWFLAKE_PASSWORD="${SNOWFLAKE_PASSWORD}"
+export SNOWFLAKE_DATABASE="${SNOWFLAKE_DATABASE}"
+export SNOWFLAKE_SCHEMA="${SNOWFLAKE_SCHEMA}"
+export SNOWFLAKE_WAREHOUSE="${SNOWFLAKE_WAREHOUSE}"
+EOF
+
+source ~/.bashrc
+
+echo "=== [6/6] Start Airflow (background) ==="
 airflow scheduler &
 airflow webserver --port 8080 &
 
 echo ""
 echo "============================================"
 echo " Setup complete!"
-echo " Airflow UI: http://<VM_EXTERNAL_IP>:8080"
-echo " Username: admin / Password: project405_team9!"
+echo " Airflow UI: http://34.94.143.232:8080"
+echo " Username: admin"
 echo "============================================"

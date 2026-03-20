@@ -71,17 +71,10 @@ with DAG(
     )
 
     # ── Task 3: Snowflake ingest (load gold tables into Snowflake) ────────
+    # Credentials are read from environment variables (set via config.env)
     snowflake_ingest = BashOperator(
         task_id="snowflake_ingest",
         bash_command=f"python3 {SCRIPTS_DIR}/snowflake_ingest.py",
-        env={
-            "SNOWFLAKE_ACCOUNT":   "dxc27173.us-east-1",
-            "SNOWFLAKE_USER":      "xiangyik585",
-            "SNOWFLAKE_PASSWORD":  "Project405_team9!",
-            "SNOWFLAKE_DATABASE":  "AIRBNB_PIPELINE",
-            "SNOWFLAKE_SCHEMA":    "GOLD",
-            "SNOWFLAKE_WAREHOUSE": "AIRBNB_WH",
-        },
         execution_timeout=timedelta(hours=1),
     )
 

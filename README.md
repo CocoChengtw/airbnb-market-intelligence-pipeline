@@ -217,7 +217,7 @@ airflow webserver --port 8080 &
 
 ### 4. Verify Airflow is running
 
-Open `http://34.94.143.232:8080` in your browser. Login with username `admin` and password `project405_team9!`.
+Open `http://34.94.143.232:8080` in your browser. Login with username `admin` and the password set in `config.env`.
 
 > If accessing via VSCode SSH, port 8080 is auto-forwarded — use `http://localhost:8080` instead.
 
