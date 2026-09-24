@@ -217,7 +217,7 @@ airflow webserver --port 8080 &
 
 ### 4. Verify Airflow is running
 
-Open `http://34.94.143.232:8080` in your browser. Login with username `admin` and the password set in `config.env`.
+Open `http://<VM_EXTERNAL_IP>:8080` in your browser. Login with username `admin` and the password set in `config.env`.
 
 > If accessing via VSCode SSH, port 8080 is auto-forwarded — use `http://localhost:8080` instead.
 
@@ -245,7 +245,7 @@ The final interactive dashboard is built in Tableau and published publicly:
 
 ## Data Access
 
-The raw and processed data resides on the GCP VM shared disk (`/shared/data/`). If you need access to the data, please email us at **xiangyi.kong.2026@anderson.ucla.edu** with your Google account and we will grant you read access to the GCP project.
+The raw and processed data resides on the GCP VM shared disk (`/shared/data/`). If you need access to the data, please open an issue in this repository and we will follow up about read access to the GCP project.
 
 ---
 
